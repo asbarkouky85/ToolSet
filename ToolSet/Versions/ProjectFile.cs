@@ -20,7 +20,6 @@ namespace ToolSet.Versions
         public string ProjectName { get; private set; }
         public bool IsCore { get; private set; }
 
-
         public ProjectFile(string path, IFileReader reader)
         {
             if (!reader.FileExists(path))
@@ -29,7 +28,7 @@ namespace ToolSet.Versions
             ProjectName = reader.GetFileName(path).Replace(".csproj", "");
             Folder = reader.GetFolderFullName(path);
             contents = reader.GetAllLines(path);
-            IsCore = _isCore();
+            IsCore = _isCore(out _targetFrameWorkLine);
             if (!IsCore)
                 _targetFrameWorkLine = contents.Count >= 5 ? 5 : (contents.Count - 1);
             _tagPattern = IsCore ? "<{0}>(.*?)</{0}>" : @"\[assembly: {0}\((.*?)\)\]";
@@ -102,7 +101,7 @@ namespace ToolSet.Versions
                         else
                             values[vParams[p]] = pValue;
 
-                        string line = string.Format(_tagFormatter, pValue.Name, pValue.Value);
+                        string line = "    "+string.Format(_tagFormatter, pValue.Name, pValue.Value);
                         pValue.Index = i + p + 1;
                         nContents.Add(line);
                         added = true;
@@ -113,22 +112,20 @@ namespace ToolSet.Versions
 
         }
 
-        bool _isCore()
+        bool _isCore(out int targetFrameWorkLine)
         {
             string targ = null;
+            targetFrameWorkLine = 0;
             for (var i = 0; i < contents.Count; i++)
             {
                 targ = GetTagContent(contents[i], "TargetFramework", "<{0}>(.*?)</{0}>");
                 if (targ != null)
                 {
-                    _targetFrameWorkLine = i;
+                    targetFrameWorkLine = i;
                     break;
                 }
             }
-            if (targ != null)
-                return targ.Contains("core") || targ.Contains("standard");
-
-            return false;
+            return targ != null;
         }
 
         public string GetTagContent(string subject, string tag, string usePattern = null)

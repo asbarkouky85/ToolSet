@@ -14,7 +14,7 @@ namespace ToolSet
                 {
                     string arg = "";
 
-                    //arg = @"-p FMS.Assets.Api 2.0.1.2 -d C:\TFS\SMEH\Source_Code\Main";
+                    arg = @"-p SASO.Attachments.Domain 1.0.0.1 -d C:\_abdelrahman\Dev\Maneh\ManehBackend\modules";
                     //arg = @"-n D:\Work\Common\PackageServer\Packages -d C:\TFS\CodeShell.Framework\DotNetCore";
                     //arg = @"-z D:\Work\ziptest D:\work\ziptest.zip";
                     //arg = @"-n ftp:administrator/DevServer123@ASGA_DEV:2121::P::/AsgaPackages/Packages -d C:\ASGA_TFS\Libraries\CodeShellCore\master";
@@ -26,7 +26,7 @@ namespace ToolSet
                     //args = new[] { $"-r", "User Id=app;Server=.;Password=123456;", "Configurator.Config_2", "C:\\ASGA_TFS\\Libraries\\Moldster\\master\\Configurator.Config.Api\\Backups\\Configurator.Config.bak" };
                     //args = new[] { $"-n", @"D:\Work\Common\PackageServer\Packages", "-d", @"C:\ASGA_TFS\Libraries\CodeShellCore\v2.11.9" };
                     //args = new[] { "-h" };
-                    args = new[] { "-q", "Server=.;User Id=app;Password=123456;Database=FMS.Configuration_v2.6", "update Resources set Name=Name" };
+                    //args = new[] { "-q", "Server=.;User Id=app;Password=123456;Database=FMS.Configuration_v2.6", "update Resources set Name=Name" };
                     Dispatcher.Dispatch(args);
                     Console.ReadLine();
                 }
