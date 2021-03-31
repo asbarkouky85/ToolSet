@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using ToolSet.Ftp;
@@ -15,7 +16,7 @@ namespace ToolSet.Nuget
         public FtpFileHandler(string path, bool isFile = false)
         {
             cl = FTPClient.FromString(path, out folder);
-            
+
         }
 
         public byte[] GetFile()
@@ -47,8 +48,8 @@ namespace ToolSet.Nuget
         public bool UploadPackage(string projectName, string version, string packagePath)
         {
             string path = Utils.CombineUrl(folder, projectName);
-            var dir = cl.GetDirectoryList(path);
-            var exists = dir.Contains(version);
+            var dir = cl.GetDirectoryList(path, WebRequestMethods.Ftp.ListDirectory);
+            var exists = dir.Any(e=>e.Contains(version));
             if (!exists)
             {
                 byte[] byts = File.ReadAllBytes(packagePath);

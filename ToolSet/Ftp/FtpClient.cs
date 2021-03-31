@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace ToolSet.Ftp
 {
@@ -85,31 +86,47 @@ namespace ToolSet.Ftp
 
         }
 
-        public string[] GetDirectoryList(string directory = null)
+        public string[] GetDirectoryList(string directory = null, string method = "LIST")
         {
             string dir = ServerUrl;
             if (directory != null)
                 dir = Utils.CombineUrl(ServerUrl, directory);
 
-            FtpWebRequest request = CreateRequest(dir, WebRequestMethods.Ftp.ListDirectoryDetails);
+            FtpWebRequest request = CreateRequest(dir, method);
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
             var arr = ReadAsArray(response);
 
-            List<string> dirs = new List<string>();
-            var s = new Regex("[ ]+");
-            foreach (var d in arr)
+            if (method == "LIST")
             {
-                var parts = s.Replace(d, ",").Split(',');
-                if (parts.Length > 3)
+                List<string> dirs = new List<string>();
+                var s = new Regex("[ ]+");
+                foreach (var d in arr)
                 {
-                    string type = parts[2];
-                    if (type == "<DIR>")
+                    var parts = s.Replace(d, ",").Split(',');
+                    if (parts.Length > 3)
                     {
-                        dirs.Add(parts[3]);
+                        string type = parts[2];
+                        if (type == "<DIR>")
+                        {
+                            dirs.Add(parts[3]);
+                        }
                     }
                 }
+                return dirs.ToArray();
             }
-            return dirs.ToArray();
+            else
+            {
+                if (directory != null)
+                {
+                    for(var i=0;i<arr.Length;i++)
+                    {
+                        arr[i] = arr[i].Replace(directory + "/", "");
+                    }
+                }
+                return arr;
+            }
+            
+            
         }
 
         string[] ReadAsArray(FtpWebResponse response)

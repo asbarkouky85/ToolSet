@@ -14,10 +14,10 @@ namespace ToolSet
                 {
                     string arg = "";
 
-                    arg = @"-p SASO.Attachments.Domain 1.0.0.1 -d C:\_abdelrahman\Dev\Maneh\ManehBackend\modules";
+                    //arg = @"-p SASO.Attachments.Domain 1.0.0.1 -d C:\_abdelrahman\Dev\Maneh\ManehBackend\modules";
                     //arg = @"-n D:\Work\Common\PackageServer\Packages -d C:\TFS\CodeShell.Framework\DotNetCore";
                     //arg = @"-z D:\Work\ziptest D:\work\ziptest.zip";
-                    //arg = @"-n ftp:administrator/DevServer123@ASGA_DEV:2121::P::/AsgaPackages/Packages -d C:\ASGA_TFS\Libraries\CodeShellCore\master";
+                    arg = @"-n ftp:administrator/AsgaTechKsa963258741@HV-DEV:21::P::/PackageServer/Packages -d C:\_git\GitHub\CodeShellCore";
                     //arg = @"-c ftp:abarkouky/Gabr1el2018@SRV-GENIAL:31::P::/SQL Backups/TopSide.bak D:/Download";
                     //arg = @"-c D:/Download/TopSide.bak ftp:abarkouky/Gabr1el2018@SRV-GENIAL:31::P::/SQL Backups";
                     args = arg.Split(' ');
