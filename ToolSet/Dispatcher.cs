@@ -68,7 +68,7 @@ namespace ToolSet
 
 
                     dis.GotoColumn(2);
-                    Console.WriteLine(l + (first ? " [-d or --folder [working directory]]" : ""));
+                    Console.WriteLine(l + (first ? " [-d [working directory]]" : ""));
 
                     first = false;
                 }
