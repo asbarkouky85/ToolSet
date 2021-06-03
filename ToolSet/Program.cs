@@ -20,6 +20,7 @@ namespace ToolSet
                     arg = @"-n ftp:administrator/AsgaTechKsa963258741@HV-DEV:21::P::/PackageServer/Packages -d C:\_git\GitHub\CodeShellCore";
                     //arg = @"-c ftp:abarkouky/Gabr1el2018@SRV-GENIAL:31::P::/SQL Backups/TopSide.bak D:/Download";
                     //arg = @"-c D:/Download/TopSide.bak ftp:abarkouky/Gabr1el2018@SRV-GENIAL:31::P::/SQL Backups";
+                    arg = @"-l modules\Maneh.IEC\src\Maneh.IEC.Domain.Shared\Localization\IEC ar en -d C:\_abdelrahman\Dev\Maneh\ManehBackend";
                     args = arg.Split(' ');
 
                     // args = new[] { @"-c", @"C:\ASGA_TFS\FMS\Source_Code\master\FMS\SQL\Backups\FMS.ASGA_v2.5.bak", @"ftp:administrator/AsgaTechKsa963258741@i-maher.com:21::A::/FMS/SQL Backups/ASGA/" };
@@ -27,6 +28,7 @@ namespace ToolSet
                     //args = new[] { $"-n", @"D:\Work\Common\PackageServer\Packages", "-d", @"C:\ASGA_TFS\Libraries\CodeShellCore\v2.11.9" };
                     //args = new[] { "-h" };
                     //args = new[] { "-q", "Server=.;User Id=app;Password=123456;Database=FMS.Configuration_v2.6", "update Resources set Name=Name" };
+
                     Dispatcher.Dispatch(args);
                     Console.ReadLine();
                 }

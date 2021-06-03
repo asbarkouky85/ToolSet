@@ -16,6 +16,7 @@ namespace ToolSet
         Copy,
         SqlRestore,
         SqlQuery,
-        SqlBackup
+        SqlBackup,
+        AbpJson
     }
 }

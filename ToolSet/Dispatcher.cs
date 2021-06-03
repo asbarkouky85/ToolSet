@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ToolSet.Ftp;
+using ToolSet.Localization;
 using ToolSet.Nuget;
 using ToolSet.Sql;
 using ToolSet.Versions;
@@ -22,6 +23,7 @@ namespace ToolSet
             OptionsDictionary['c'] = FunctionTypes.Copy;
             OptionsDictionary['r'] = FunctionTypes.SqlRestore;
             OptionsDictionary['q'] = FunctionTypes.SqlQuery;
+            OptionsDictionary['l'] = FunctionTypes.AbpJson;
         }
 
         public static void Dispatch(string[] args)
@@ -58,15 +60,15 @@ namespace ToolSet
                 if (s.Key == 'h')
                     continue;
                 var helpLines = GetRequest(s.Value).GetHelp();
-                
+
                 Console.Write("toolset -" + s.Key);
                 var first = true;
-                foreach(var l in helpLines)
+                foreach (var l in helpLines)
                 {
 
-                    
+
                     dis.GotoColumn(2);
-                    Console.WriteLine(l+(first?" [-d or --folder [working directory]]":""));
+                    Console.WriteLine(l + (first ? " [-d [working directory]]" : ""));
 
                     first = false;
                 }
@@ -80,7 +82,7 @@ namespace ToolSet
 
         private static RequestBase GetRequest(FunctionTypes Option, string[] args = null)
         {
-            args = args?? new string[0];
+            args = args ?? new string[0];
             switch (Option)
             {
                 case FunctionTypes.Project:
@@ -98,6 +100,9 @@ namespace ToolSet
                     return new SqlRestoreRequest(args);
                 case FunctionTypes.SqlQuery:
                     return new SqlQueryRequest(args);
+
+                case FunctionTypes.AbpJson:
+                    return new AbpSyncLanguagesRequest(args);
             }
 
         }
