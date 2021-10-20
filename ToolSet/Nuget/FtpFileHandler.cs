@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CodeShellCore.Helpers;
+using CodeShellCore.Text;
+using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToolSet.Ftp;
 
 namespace ToolSet.Nuget
 {
-    public class FtpFileHandler : IFileHandler
+    public class FtpFileHandler : IToolSetFileHandler
     {
         string folder;
-        FTPClient cl;
+        ToolSetFTPClient cl;
         public FtpFileHandler(string path, bool isFile = false)
         {
-            cl = FTPClient.FromString(path, out folder);
-            
+            cl = ToolSetFTPClient.FromString(path, out folder);
+
         }
 
         public byte[] GetFile()

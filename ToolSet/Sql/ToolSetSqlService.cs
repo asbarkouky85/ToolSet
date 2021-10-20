@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CodeShellCore;
+using CodeShellCore.Cli;
+using CodeShellCore.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -7,13 +10,13 @@ using System.Reflection;
 
 namespace ToolSet.Sql
 {
-    public class SqlService : ConsoleService
+    public class ToolSetSqlService : ConsoleService
     {
         public virtual int CommandTimeout { get; set; }
         public virtual DbConnectionParams ConnectionParams { get; set; }
         public override int SuccessCol => 10;
 
-        public SqlService()
+        public ToolSetSqlService()
         {
         }
 
@@ -152,13 +155,13 @@ namespace ToolSet.Sql
                             }
                             conn.Open();
                             SqlCommand cmd = new SqlCommand(sqlBatch, conn);
-                            
+
                             if (CommandTimeout != 0)
                                 cmd.CommandTimeout = CommandTimeout;
 
 
                             var rows = cmd.ExecuteNonQuery();
-                            res.Message = "Affected rows "+rows;
+                            res.Message = "Affected rows " + rows;
 
                             sqlBatch = string.Empty;
                             conn.Close();
@@ -169,7 +172,7 @@ namespace ToolSet.Sql
                             conn.Close();
                             res.SetException(ex);
                             res.Code = 1;
-                            
+
                             res.Data["SQL"] = sqlBatch;
                             break;
                         }

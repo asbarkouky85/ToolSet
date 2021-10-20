@@ -172,21 +172,21 @@ namespace ToolSet.Versions
         {
             if (IsCore)
             {
-                values["Version"].Value = req.LongVersion;
-                values["AssemblyVersion"].Value = req.LongVersion;
-                values["FileVersion"].Value = req.LongVersion;
+                values["Version"].Value = req.GetLongVersionString();
+                values["AssemblyVersion"].Value = req.GetLongVersionString();
+                values["FileVersion"].Value = req.GetLongVersionString();
             }
             else
             {
-                values["AssemblyTitle"].Value = ProjectName + "-v" + req.ShortVersion;
-                values["AssemblyProduct"].Value = ProjectName + "-v" + req.ShortVersion;
-                values["AssemblyVersion"].Value = req.LongVersion;
-                values["AssemblyFileVersion"].Value = req.LongVersion;
+                values["AssemblyTitle"].Value = ProjectName + "-v" + req.GetShortVersion();
+                values["AssemblyProduct"].Value = ProjectName + "-v" + req.GetShortVersion();
+                values["AssemblyVersion"].Value = req.GetShortVersion();
+                values["AssemblyFileVersion"].Value = req.GetShortVersion();
             }
 
             if (req.IsWeb)
             {
-                SetPublishProfile(req.PublishProfile, req.LongVersion);
+                SetPublishProfile(req.PublishProfile, req.GetLongVersionString());
             }
 
         }

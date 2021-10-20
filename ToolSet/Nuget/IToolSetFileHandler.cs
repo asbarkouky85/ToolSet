@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToolSet.Nuget
 {
-    public interface IFileHandler
+    public interface IToolSetFileHandler
     {
         bool UploadPackage(string projectName, string version, string packagePath);
 

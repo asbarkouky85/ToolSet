@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ToolSet.Nuget
 {
-    public class DefaultFileHandler : IFileHandler
+    public class DefaultFileHandler : IToolSetFileHandler
     {
         private string nugetPath;
 

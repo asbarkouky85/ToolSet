@@ -3,30 +3,33 @@ using System.Collections.Generic;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
+using CodeShellCore.Text;
+using CodeShellCore.Helpers;
+using CodeShellCore.Net.Ftp;
 
 namespace ToolSet.Ftp
 {
-    public class FTPClient
+    public class ToolSetFTPClient
     {
         private string ServerUrl;
         private string UserName;
         private string Password;
         public bool Active { get; set; }
 
-        public FTPClient(string server, string usr, string pswrd)
+        public ToolSetFTPClient(string server, string usr, string pswrd)
         {
             ServerUrl = "ftp://" + server;
             UserName = usr;
             Password = pswrd;
         }
 
-        public static FTPClient FromString(string connectionString, out string pathOnServer)
+        public static ToolSetFTPClient FromString(string connectionString, out string pathOnServer)
         {
             string patt = "ftp:(.*)/(.*)@(.*)::(.)::(.*)";
 
             if (connectionString.GetPatternContents(patt, out string[] res) && res.Length >= 5)
             {
-                var cl = new FTPClient(res[2], res[0], res[1]);
+                var cl = new ToolSetFTPClient(res[2], res[0], res[1]);
                 pathOnServer = res[4];
                 cl.Active = res[3] == "A";
                 return cl;

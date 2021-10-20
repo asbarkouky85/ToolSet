@@ -10,7 +10,6 @@ namespace ToolSet
     {
         Project,
         Help,
-        Web,
         Nuget,
         Zip,
         Copy,
