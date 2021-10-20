@@ -45,8 +45,14 @@ namespace ToolSet.Nuget
 
         public bool UploadPackage(string projectName, string version, string packagePath)
         {
+            var existing = cl.GetDirectoryList(folder);
+            
             string path = Utils.CombineUrl(folder, projectName);
-            var dir = cl.GetDirectoryList(path);
+            var dir = new string[] { };
+            if (existing.Contains(projectName))
+            {
+                dir = cl.GetDirectoryList(path);
+            }
             var exists = dir.Contains(version);
             if (!exists)
             {
